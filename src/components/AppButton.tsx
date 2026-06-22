@@ -50,23 +50,23 @@ export function AppButton({
 const styles = StyleSheet.create({
   base: {
     alignItems: 'center',
-    borderRadius: radius.sm,
+    borderRadius: radius.md,
     borderWidth: 1,
     justifyContent: 'center',
-    minHeight: 44,
+    minHeight: 46,
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.sm,
   },
   primary: {
-    backgroundColor: colors.coral,
-    borderColor: colors.coral,
+    backgroundColor: colors.blue,
+    borderColor: colors.blue,
   },
   secondary: {
     backgroundColor: colors.ink,
     borderColor: colors.ink,
   },
   ghost: {
-    backgroundColor: 'transparent',
+    backgroundColor: colors.surface,
     borderColor: colors.line,
   },
   danger: {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: typography.body,
     fontSize: 15,
-    fontWeight: '700',
+    fontWeight: '800',
     letterSpacing: 0,
   },
   smallLabel: {
@@ -107,7 +107,7 @@ const labelStyles = StyleSheet.create({
     color: colors.surface,
   },
   ghost: {
-    color: colors.ink,
+    color: colors.slate,
   },
   danger: {
     color: colors.danger,

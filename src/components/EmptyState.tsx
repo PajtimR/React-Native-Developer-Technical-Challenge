@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { colors, radius, spacing, typography } from '../theme';
+import { colors, radius, shadowStyle, spacing, typography } from '../theme';
 import { AppButton } from './AppButton';
 
 type EmptyStateProps = {
@@ -25,6 +25,7 @@ export function EmptyState({ title, body, actionLabel, onAction }: EmptyStatePro
 
 const styles = StyleSheet.create({
   container: {
+    ...shadowStyle,
     alignItems: 'center',
     backgroundColor: colors.surface,
     borderColor: colors.line,
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     padding: spacing.xl,
   },
   rule: {
-    backgroundColor: colors.mint,
+    backgroundColor: colors.blue,
     height: 3,
     marginBottom: spacing.lg,
     width: 52,

@@ -17,7 +17,10 @@ export function TaskCard({ task, onOpen, onToggle, onDelete }: TaskCardProps) {
   return (
     <View style={[styles.card, task.completed && styles.completedCard]}>
       <View style={styles.topRow}>
-        <StatusPill completed={task.completed} />
+        <View style={styles.statusRow}>
+          <View style={[styles.dot, task.completed && styles.completedDot]} />
+          <StatusPill completed={task.completed} />
+        </View>
         <Text style={styles.date}>{formatCreatedDate(task.createdAt)}</Text>
       </View>
       <Text style={[styles.title, task.completed && styles.completedTitle]} numberOfLines={2}>
@@ -45,21 +48,33 @@ const styles = StyleSheet.create({
     ...shadowStyle,
     backgroundColor: colors.surface,
     borderColor: colors.line,
-    borderLeftColor: colors.coral,
-    borderLeftWidth: 4,
     borderRadius: radius.md,
     borderWidth: 1,
     marginBottom: spacing.md,
     padding: spacing.lg,
   },
   completedCard: {
-    borderLeftColor: colors.mint,
+    backgroundColor: '#FBFDFC',
   },
   topRow: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: spacing.md,
+  },
+  statusRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: spacing.sm,
+  },
+  dot: {
+    backgroundColor: colors.blue,
+    borderRadius: 5,
+    height: 10,
+    width: 10,
+  },
+  completedDot: {
+    backgroundColor: colors.mint,
   },
   date: {
     color: colors.muted,
@@ -73,7 +88,7 @@ const styles = StyleSheet.create({
   title: {
     color: colors.ink,
     fontFamily: typography.display,
-    fontSize: 20,
+    fontSize: 21,
     fontWeight: '800',
     letterSpacing: 0,
     lineHeight: 25,
@@ -87,12 +102,15 @@ const styles = StyleSheet.create({
     color: colors.slate,
     fontFamily: typography.body,
     fontSize: 14,
-    lineHeight: 21,
+    lineHeight: 22,
   },
   actions: {
+    borderTopColor: colors.line,
+    borderTopWidth: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: spacing.sm,
     marginTop: spacing.lg,
+    paddingTop: spacing.md,
   },
 });

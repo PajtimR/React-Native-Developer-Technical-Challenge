@@ -15,7 +15,7 @@ import { EmptyState } from '../components/EmptyState';
 import { FilterPill } from '../components/FilterPill';
 import { SuggestionCard } from '../components/SuggestionCard';
 import { TaskCard } from '../components/TaskCard';
-import { colors, spacing, typography } from '../theme';
+import { colors, shadowStyle, spacing, typography } from '../theme';
 import { ApiTaskSuggestion, Task, TaskStatusFilter } from '../types';
 import { filterTasks } from '../utils/tasks';
 
@@ -69,53 +69,58 @@ export function TaskListScreen({
       refreshControl={<RefreshControl refreshing={suggestionsLoading} onRefresh={onRefreshSuggestions} />}
       ListHeaderComponent={
         <View>
-          <View style={styles.ledgerHeader}>
-            <View>
-              <Text style={styles.eyebrow}>Task Manager</Text>
-              <Text style={styles.title}>My Tasks</Text>
+          <View style={styles.summaryCard}>
+            <View style={styles.ledgerHeader}>
+              <View style={styles.headingBlock}>
+                <Text style={styles.eyebrow}>Task Manager</Text>
+                <Text style={styles.title}>My Tasks</Text>
+                <Text style={styles.subtitle}>Keep the list small, clear, and easy to finish.</Text>
+              </View>
+              <AppButton label="Add" onPress={onAddTask} small />
             </View>
-            <AppButton label="Add" onPress={onAddTask} small />
-          </View>
 
-          <View style={styles.statsRow}>
-            <View style={styles.statBlock}>
-              <Text style={styles.statValue}>{tasks.length}</Text>
-              <Text style={styles.statLabel}>Total</Text>
-            </View>
-            <View style={styles.statBlock}>
-              <Text style={styles.statValue}>{openCount}</Text>
-              <Text style={styles.statLabel}>Open</Text>
-            </View>
-            <View style={styles.statBlock}>
-              <Text style={styles.statValue}>{completedCount}</Text>
-              <Text style={styles.statLabel}>Done</Text>
+            <View style={styles.statsRow}>
+              <View style={styles.statBlock}>
+                <Text style={styles.statValue}>{tasks.length}</Text>
+                <Text style={styles.statLabel}>Total</Text>
+              </View>
+              <View style={styles.statBlock}>
+                <Text style={styles.statValue}>{openCount}</Text>
+                <Text style={styles.statLabel}>Open</Text>
+              </View>
+              <View style={styles.statBlock}>
+                <Text style={styles.statValue}>{completedCount}</Text>
+                <Text style={styles.statLabel}>Done</Text>
+              </View>
             </View>
           </View>
 
           {storageError ? <Text style={styles.warningText}>{storageError}</Text> : null}
 
-          <TextInput
-            accessibilityLabel="Search tasks"
-            autoCapitalize="none"
-            autoCorrect={false}
-            clearButtonMode="while-editing"
-            onChangeText={setQuery}
-            placeholder="Search by title or description"
-            placeholderTextColor={colors.muted}
-            style={styles.searchInput}
-            value={query}
-          />
+          <View style={styles.controlsBlock}>
+            <TextInput
+              accessibilityLabel="Search tasks"
+              autoCapitalize="none"
+              autoCorrect={false}
+              clearButtonMode="while-editing"
+              onChangeText={setQuery}
+              placeholder="Search by title or description"
+              placeholderTextColor={colors.muted}
+              style={styles.searchInput}
+              value={query}
+            />
 
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filters}>
-            {filters.map((filter) => (
-              <FilterPill
-                key={filter.value}
-                active={filter.value === statusFilter}
-                label={filter.label}
-                onPress={() => setStatusFilter(filter.value)}
-              />
-            ))}
-          </ScrollView>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filters}>
+              {filters.map((filter) => (
+                <FilterPill
+                  key={filter.value}
+                  active={filter.value === statusFilter}
+                  label={filter.label}
+                  onPress={() => setStatusFilter(filter.value)}
+                />
+              ))}
+            </ScrollView>
+          </View>
 
           <View style={styles.sectionHeader}>
             <View>
@@ -190,15 +195,27 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
     paddingBottom: spacing.xxl,
   },
+  summaryCard: {
+    ...shadowStyle,
+    backgroundColor: colors.surface,
+    borderColor: colors.line,
+    borderRadius: 8,
+    borderWidth: 1,
+    marginBottom: spacing.lg,
+    padding: spacing.lg,
+  },
   ledgerHeader: {
     alignItems: 'flex-start',
     flexDirection: 'row',
+    gap: spacing.md,
     justifyContent: 'space-between',
     marginBottom: spacing.lg,
-    marginTop: spacing.sm,
+  },
+  headingBlock: {
+    flex: 1,
   },
   eyebrow: {
-    color: colors.coral,
+    color: colors.blue,
     fontFamily: typography.utility,
     fontSize: 12,
     fontWeight: '700',
@@ -209,34 +226,42 @@ const styles = StyleSheet.create({
   title: {
     color: colors.ink,
     fontFamily: typography.display,
-    fontSize: 34,
+    fontSize: 32,
     fontWeight: '900',
     letterSpacing: 0,
-    lineHeight: 38,
+    lineHeight: 36,
+  },
+  subtitle: {
+    color: colors.muted,
+    fontFamily: typography.body,
+    fontSize: 14,
+    lineHeight: 20,
+    marginTop: spacing.sm,
   },
   statsRow: {
-    backgroundColor: colors.ink,
+    backgroundColor: colors.paper,
+    borderColor: colors.line,
     borderRadius: 8,
+    borderWidth: 1,
     flexDirection: 'row',
-    marginBottom: spacing.lg,
     overflow: 'hidden',
   },
   statBlock: {
-    borderRightColor: 'rgba(255,255,255,0.14)',
+    borderRightColor: colors.line,
     borderRightWidth: 1,
     flex: 1,
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.lg,
+    paddingVertical: spacing.md,
   },
   statValue: {
-    color: colors.surface,
+    color: colors.ink,
     fontFamily: typography.display,
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: '900',
     letterSpacing: 0,
   },
   statLabel: {
-    color: '#BFD3CB',
+    color: colors.muted,
     fontFamily: typography.utility,
     fontSize: 11,
     fontWeight: '700',
@@ -254,6 +279,9 @@ const styles = StyleSheet.create({
     marginBottom: spacing.md,
     padding: spacing.md,
   },
+  controlsBlock: {
+    marginBottom: spacing.md,
+  },
   searchInput: {
     backgroundColor: colors.surface,
     borderColor: colors.line,
@@ -262,12 +290,13 @@ const styles = StyleSheet.create({
     color: colors.ink,
     fontFamily: typography.body,
     fontSize: 16,
-    minHeight: 48,
-    paddingHorizontal: spacing.md,
+    minHeight: 50,
+    paddingHorizontal: spacing.lg,
   },
   filters: {
     gap: spacing.sm,
-    paddingVertical: spacing.md,
+    paddingBottom: spacing.sm,
+    paddingTop: spacing.md,
   },
   sectionHeader: {
     alignItems: 'center',

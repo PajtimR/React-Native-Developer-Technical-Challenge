@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
   base: {
     backgroundColor: colors.surface,
     borderColor: colors.line,
-    borderRadius: radius.sm,
+    borderRadius: radius.md,
     borderWidth: 1,
     minHeight: 38,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
   },
   active: {
-    backgroundColor: colors.ink,
-    borderColor: colors.ink,
+    backgroundColor: colors.blue,
+    borderColor: colors.blue,
   },
   pressed: {
     opacity: 0.78,

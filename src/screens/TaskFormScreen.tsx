@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import { AppButton } from '../components/AppButton';
-import { colors, radius, spacing, typography } from '../theme';
+import { colors, radius, shadowStyle, spacing, typography } from '../theme';
 import { NewTaskInput } from '../types';
 import { TaskDraftErrors, validateTaskDraft } from '../utils/tasks';
 
@@ -51,6 +51,7 @@ export function TaskFormScreen({ draft, onCancel, onCreate }: TaskFormScreenProp
 
         <Text style={styles.kicker}>New entry</Text>
         <Text style={styles.title}>Add a task</Text>
+        <Text style={styles.subtitle}>Fill in both fields to save a clear task.</Text>
 
         <View style={styles.formBlock}>
           <Text style={styles.label}>Title</Text>
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   kicker: {
-    color: colors.coral,
+    color: colors.blue,
     fontFamily: typography.utility,
     fontSize: 12,
     fontWeight: '700',
@@ -142,9 +143,17 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     letterSpacing: 0,
     lineHeight: 38,
+    marginBottom: spacing.sm,
+  },
+  subtitle: {
+    color: colors.muted,
+    fontFamily: typography.body,
+    fontSize: 15,
+    lineHeight: 22,
     marginBottom: spacing.xl,
   },
   formBlock: {
+    ...shadowStyle,
     backgroundColor: colors.surface,
     borderColor: colors.line,
     borderRadius: radius.md,
@@ -164,7 +173,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.lg,
   },
   input: {
-    backgroundColor: colors.paper,
+    backgroundColor: '#FAFCFF',
     borderColor: colors.line,
     borderRadius: radius.sm,
     borderWidth: 1,
@@ -181,6 +190,7 @@ const styles = StyleSheet.create({
   },
   inputError: {
     borderColor: colors.danger,
+    backgroundColor: '#FFFBFA',
   },
   error: {
     color: colors.danger,

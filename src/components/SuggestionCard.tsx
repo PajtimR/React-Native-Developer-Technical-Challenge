@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
     ...shadowStyle,
     backgroundColor: colors.surface,
     borderColor: colors.line,
+    borderTopColor: colors.blue,
+    borderTopWidth: 3,
     borderRadius: radius.md,
     borderWidth: 1,
     marginRight: spacing.md,
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     width: 184,
   },
   kicker: {
-    color: colors.coral,
+    color: colors.blue,
     fontFamily: typography.utility,
     fontSize: 11,
     fontWeight: '700',

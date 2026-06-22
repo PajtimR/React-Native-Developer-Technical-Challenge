@@ -19,7 +19,7 @@ export function TaskDetailsScreen({ task, onBack, onToggle, onDelete }: TaskDeta
     return (
       <ScrollView contentContainerStyle={styles.content}>
         <AppButton label="Back" onPress={onBack} small variant="ghost" style={styles.backButton} />
-        <EmptyState title="Task not found" body="This entry is no longer in the ledger." actionLabel="Return" onAction={onBack} />
+        <EmptyState title="Task not found" body="This task is no longer in the list." actionLabel="Return" onAction={onBack} />
       </ScrollView>
     );
   }
@@ -31,8 +31,10 @@ export function TaskDetailsScreen({ task, onBack, onToggle, onDelete }: TaskDeta
         <StatusPill completed={task.completed} />
       </View>
 
-      <Text style={styles.kicker}>Task details</Text>
-      <Text style={[styles.title, task.completed && styles.completedTitle]}>{task.title}</Text>
+      <View style={styles.headerBlock}>
+        <Text style={styles.kicker}>Task details</Text>
+        <Text style={[styles.title, task.completed && styles.completedTitle]}>{task.title}</Text>
+      </View>
 
       <View style={styles.detailBlock}>
         <View style={styles.metaRow}>
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xl,
   },
   kicker: {
-    color: colors.coral,
+    color: colors.blue,
     fontFamily: typography.utility,
     fontSize: 12,
     fontWeight: '700',
@@ -92,6 +94,8 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     letterSpacing: 0,
     lineHeight: 39,
+  },
+  headerBlock: {
     marginBottom: spacing.xl,
   },
   completedTitle: {
