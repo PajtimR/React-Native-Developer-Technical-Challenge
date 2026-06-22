@@ -32,7 +32,7 @@ npx expo start -c
 
 - View all tasks in a clean task list.
 - Add a task with a title and description.
-- Validate the form before saving.
+- Validate the title and description before saving.
 - Mark tasks as completed or open again.
 - Delete tasks with a confirmation alert.
 - Open a task details screen.

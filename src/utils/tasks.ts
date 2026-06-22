@@ -34,7 +34,9 @@ export function validateTaskDraft(input: NewTaskInput): { errors: TaskDraftError
     errors.title = 'Keep the title under 80 characters.';
   }
 
-  if (description.length > 280) {
+  if (!description) {
+    errors.description = 'Enter a short task description.';
+  } else if (description.length > 280) {
     errors.description = 'Keep the description under 280 characters.';
   }
 
