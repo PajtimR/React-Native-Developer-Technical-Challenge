@@ -71,8 +71,8 @@ export function TaskListScreen({
         <View>
           <View style={styles.ledgerHeader}>
             <View>
-              <Text style={styles.eyebrow}>Pocket Ledger</Text>
-              <Text style={styles.title}>Personal tasks</Text>
+              <Text style={styles.eyebrow}>Task Manager</Text>
+              <Text style={styles.title}>My Tasks</Text>
             </View>
             <AppButton label="Add" onPress={onAddTask} small />
           </View>
@@ -169,7 +169,7 @@ export function TaskListScreen({
         ) : (
           <View style={styles.loadingBlock}>
             <ActivityIndicator color={colors.ink} />
-            <Text style={styles.apiText}>Opening ledger...</Text>
+            <Text style={styles.apiText}>Loading tasks...</Text>
           </View>
         )
       }
